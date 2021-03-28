@@ -187,15 +187,11 @@ set_prompt () {
 #  fi
 
   # set iterm2 environments for Skyrise/Vagrant/bp-dev/GHES inner loops
-  if [[ $(hostname) =~ ^.*bpdev.*github-net$ || $(hostname) =~ ^[0-9]+-[0-9]+-[0-9]+-[0-9]+$ ]]; then
-    set_iterm2_environment "macos>bp-dev>ghes" ghes
-  elif [[ $(hostname) == "enterprise2" ]]; then
-    set_iterm2_environment "macos>vagrant" vagrant
-  elif [[ $(hostname) =~ ^ip-[0-9]+-[0-9]+-[0-9]+-[0-9]+$ ]]; then # e.g., "ip-10-212-1-152"
-    set_iterm2_environment "macos>bp-dev" bp-dev 
-  else
-    set_iterm2_environment macos macos
+  shorthostname=$(sed 's/\([^\.]*\).*/\1/' <<< $(hostname))
+  if [[ $shorthostname == "Edwins-MBP" ]]; then
+    shorthostname="macos"
   fi
+  set_iterm2_environment "$shorthostname" $shorthostname
   PS1+="$Green$iterm2environment: "
 
   # Print the working directory and prompt marker in blue
@@ -238,7 +234,4 @@ else
   export LS_COLORS
   alias ls='ls --color=auto'
 fi
-
-# For bp-dev instances
-export ENABLE_ACTIONS=1
 

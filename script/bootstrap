@@ -140,7 +140,12 @@ install_dotfiles () {
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
   do
     dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
+    if [ -f "$dst" ] && [[ "$dst" == "$HOME/.gitconfig" ]] && [[ $(($(grep "^\\[" $HOME/.gitconfig | wc -l))) == 2 ]]; then
+      # Handle gitconfig.symlink specially for bp-dev which has already populated it with my user/email.
+      cat "$src" >> "$dst"
+    else
+      link_file "$src" "$dst"
+    fi
   done
 }
 

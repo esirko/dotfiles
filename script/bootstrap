@@ -79,8 +79,9 @@ link_file () {
       else
 
         user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-        read -n 1 action
+        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?\n\
+        Defaulting to [S]kip all if no response received within 30 seconds."
+        read -n 1 -t 30 action || { echo "No response received, skipping all"; skip_all=true; };
 
         case "$action" in
           o )

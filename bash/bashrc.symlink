@@ -8,9 +8,9 @@ else
 #  else
     rcfile=".bashrc"
 #  fi
-  echo "This $rcfile needs gdate for subsecond timing." >&2
-  echo "Install with: brew install coreutils" >&2
-  echo "Falling back to imprecise timing." >&2
+#  echo "This $rcfile needs gdate for subsecond timing." >&2
+#  echo "Install with: brew install coreutils" >&2
+#  echo "Falling back to imprecise timing." >&2
 fi
 
 # in iterm2, set the badge to `\(user.iterm2environment)`

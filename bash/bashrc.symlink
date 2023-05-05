@@ -234,3 +234,12 @@ export EDITOR=vim
 # See https://vi.stackexchange.com/questions/16951/how-to-set-vims-background-based-on-terminals-background-colour
 export COLORFGBG="7;0"
 
+if [ "$UNAME" = "Darwin" ]; then
+  alias sshy='ssh -o StrictHostKeyChecking=no'
+  alias okta="security find-generic-password -l device_trust '-w'"
+  alias clean-actions-runner='if [[ "$(pwd)" == "/Users/esirko/actions-runner"* ]]; then rm -fr * .*; else echo "Not in safe directory"; fi'
+fi
+
+if [[ -n "$CODESPACES" && "$GITHUB_REPOSITORY" == "github/github" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi

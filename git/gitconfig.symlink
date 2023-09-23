@@ -36,6 +36,8 @@
         default = simple
 [credential]
 	helper = osxkeychain
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 # Windows diff/merge
 #[diff]
 #	tool = winmerge
@@ -59,3 +61,5 @@
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+[credential "https://dev.azure.com"]
+	useHttpPath = true

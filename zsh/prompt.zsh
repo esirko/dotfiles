@@ -148,22 +148,20 @@ current_time() {
   echo "%*"
 }
 
-set_iterm2_environment() {
-  export iterm2environment=$1
-  export iterm2environmentshort=$2
-# Having trouble getting this to work without shifting the git status RPROMPT over quite a bit
-#  printf "\033]1337;SetUserVar=%s=%s\007" iterm2environment `echo -n $iterm2environmentshort | base64`
-#  printf "\e]1337;SetBadgeFormat=%s\a" $(echo -n $iterm2environmentshort | base64)
-}
-#export -f set_iterm2_environment 1>/dev/null
-
-machine_name() {
+get_shorthostname() {
   shorthostname=$(sed 's/\([^\.]*\).*/\1/' <<< $(hostname))
   if [[ $shorthostname == "Edwins-MBP" || $shorthostname == "Edwins-MBP-2" || $shorthostname == "Edwins-MacBook-Pro" ]]; then
     shorthostname="macos"
   fi
-  set_iterm2_environment "$shorthostname" $shorthostname
-  echo "%{$fg_bold[green]%}$shorthostname%{$reset_color%}"
+  echo $shorthostname
+}
+
+machine_name() {
+  echo "%{$fg_bold[green]%}$(get_shorthostname)%{$reset_color%}"
+}
+
+set_iterm2_badge() {
+  printf "\e]1337;SetBadgeFormat=%s\a" $(echo -n $(get_shorthostname) | base64)
 }
 
 export PROMPT=$'$(colorized_exit_code) $(elapsed) $(current_time) $(machine_name): $(directory_name)> '
@@ -179,4 +177,5 @@ precmd() {
   LastExitCodeValue=$? # Must come first
   title "zsh" "%m" "%55<...<%~"
   set_prompt
+  set_iterm2_badge
 }

@@ -34,10 +34,6 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
-[credential]
-	helper = osxkeychain
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
 # Windows diff/merge
 #[diff]
 #	tool = winmerge

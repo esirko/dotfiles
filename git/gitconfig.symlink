@@ -26,30 +26,45 @@
         keepBackup = false
 [difftool]
         prompt = false
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+
 [help]
-        autocorrect = 1
+        autocorrect = prompt
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
         default = simple
-# Windows diff/merge
-#[diff]
-#	tool = winmerge
-#[merge]
-#	tool = araxis
-#[mergetool "araxis"]
-#	path = C:\\Program Files\\Araxis\\Araxis Merge\\Compare.exe
-# Mac diff/merge
+        autoSetupRemote = true
+        followTags = true
 [diff]
 	tool = Kaleidoscope
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+[rerere]
+        enabled = true
+        autoupdate = true
 [difftool]
 	prompt = false
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [merge]
 	tool = Kaleidoscope
+        conflictstyle = zdiff3
 [mergetool]
 	prompt = false
 #[mergetool "araxis"]

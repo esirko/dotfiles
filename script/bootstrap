@@ -2,6 +2,8 @@
 #
 # bootstrap installs things.
 
+DOTFILES_BACKUP_CONFLICTS=1 # helps codespaces use my .bashrc
+
 if [ -n "${SHOULD_LOG_DOTFILES_SETUP}" ] && [ -z "${LOGGING_DOTFILES_SETUP:-}" ] ; then
   echo "# $(date)" > "$HOME/.dotfiles-setup.log"
   LOGGING_DOTFILES_SETUP=1 exec "$0" >> "$HOME/.dotfiles-setup.log" 2>&1

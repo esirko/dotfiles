@@ -241,6 +241,11 @@ if [ "$UNAME" = "Darwin" ]; then
   alias clean-actions-runner='if [[ "$(pwd)" == "/Users/esirko/actions-runner"* ]]; then rm -fr * .*; else echo "Not in safe directory"; fi'
 fi
 
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit -m'
+alias gp='git push'
+
 if [[ -n "$CODESPACES" && "$GITHUB_REPOSITORY" == "github/github" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi

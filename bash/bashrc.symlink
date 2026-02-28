@@ -1,3 +1,8 @@
+if [ -f "$HOME/.bashrc.backup" ]; then
+  . "$HOME/.bashrc.backup"
+fi
+
+
 UNAME=`uname`
 
 if [ -x "$(command -v gdate)" ]; then

@@ -166,7 +166,8 @@ set_iterm2_badge() {
 
 export PROMPT=$'$(colorized_exit_code) $(elapsed) $(current_time) $(machine_name): $(directory_name)> '
 set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}$(git_dirty)$(need_push)%{$reset_color%}"
+  # Don't calculate the git branch every time - it can be slow and I usually just do git status when I need to
+  # export RPROMPT="%{$fg_bold[cyan]%}$(git_dirty)$(need_push)%{$reset_color%}"
 }
 
 preexec() {

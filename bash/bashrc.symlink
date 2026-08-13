@@ -1,4 +1,4 @@
-if [ -f "$HOME/.bashrc.backup" ]; then
+if [ -f "$HOME/.bashrc.backup" ] && [ ! -L "$HOME/.bashrc.backup" ]; then
   . "$HOME/.bashrc.backup"
 fi
 
@@ -215,9 +215,9 @@ trap 'timer_start' DEBUG
 PROMPT_COMMAND='set_prompt'
 
 if [ -n "$ZSH_VERSION" ]; then
-  precmd() { 
+  precmd() {
     # Set the prompt first because the first thing it does is check the last error code.
-    eval "$PROMPT_COMMAND" 
+    eval "$PROMPT_COMMAND"
     # Set the title of the window in zsh
     echo -ne "\e]1;$iterm2environment: ${PWD/#"$HOME"/~}\a"
   }
@@ -253,4 +253,18 @@ alias gs='git status'
 alias ga='git add .'
 alias gc='git commit -m'
 alias gp='git push'
+
+dotfiles_bashrc="${BASH_SOURCE[0]}"
+if [ -L "$dotfiles_bashrc" ]; then
+  dotfiles_bashrc_target=$(readlink "$dotfiles_bashrc")
+  if [[ "$dotfiles_bashrc_target" != /* ]]; then
+    dotfiles_bashrc_target="$(cd "$(dirname "$dotfiles_bashrc")" && pwd -P)/$dotfiles_bashrc_target"
+  fi
+  dotfiles_bashrc="$dotfiles_bashrc_target"
+fi
+dotfiles_root=$(cd "$(dirname "$dotfiles_bashrc")/.." && pwd -P)
+if [ -f "$dotfiles_root/codespace/gh-codespace.sh" ]; then
+  . "$dotfiles_root/codespace/gh-codespace.sh"
+fi
+unset dotfiles_bashrc dotfiles_bashrc_target dotfiles_root
 

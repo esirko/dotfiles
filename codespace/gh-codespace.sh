@@ -69,7 +69,7 @@ newcolor() {
       "activityBar.background": "${BASE_HEX}",
       "titleBar.activeBackground": "${ACTIVE_HEX}",
       "titleBar.activeForeground": "#F3FCF7",
-      "titleBar.inactiveBackground": "${BASE_HEX}",
+      "titleBar.inactiveBackground": "${ACTIVE_HEX}",
       "titleBar.inactiveForeground": "#F3FCF7",
       "statusBar.background": "${BASE_HEX}",
       "statusBar.foreground": "#F3FCF7",

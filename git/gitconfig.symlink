@@ -35,8 +35,6 @@
 [init]
         defaultBranch = main
 
-[help]
-        autocorrect = prompt
 [push]
         default = simple
         autoSetupRemote = true
